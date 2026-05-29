@@ -1,0 +1,22 @@
+[
+    {
+        "caption": "LiuConda: Go to Definition",
+        "command": "liu_conda_goto_definition"
+    },
+    {
+        "caption": "LiuConda: Show Documentation",
+        "command": "liu_conda_show_documentation"
+    },
+    {
+        "caption": "LiuConda: Type Diagnostics",
+        "command": "liu_conda_type_diagnostics"
+    },
+    {
+        "caption": "LiuConda: Refresh Env",
+        "command": "liu_conda_refresh_env"
+    },
+    {
+        "caption": "LiuConda: Zuban Status",
+        "command": "liu_conda_zuban_status"
+    }
+]

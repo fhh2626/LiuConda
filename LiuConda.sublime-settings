@@ -1,0 +1,19 @@
+{
+    "backend": "conda",
+    "backend_executables": {
+        "conda": "",
+        "micromamba": ""
+    },
+    "selected_env": "",
+    "envs": [],
+    "python": "python",
+    "zuban": "zuban",
+    "jedi_timeout": 5,
+    "jedi_command_timeout": 20,
+    "zuban_timeout": 10,
+    "runtime_documentation_import_whitelist": [
+        "numpy"
+    ],
+    "hover_documentation": false,
+    "global_path_search": false
+}

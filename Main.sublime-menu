@@ -1,0 +1,100 @@
+[
+    {
+        "caption": "Preferences",
+        "id": "preferences"
+    },
+    {
+        "caption": "LiuPlugins",
+        "id": "liu_plugins",
+        "children": [
+            {
+                "caption": "LiuConda",
+                "id": "liu_conda",
+                "children": [
+                    {
+                        "caption": "Conda Version",
+                        "children": [
+                            {
+                                "caption": "conda",
+                                "command": "liu_conda_set_backend",
+                                "args": {
+                                    "backend": "conda"
+                                },
+                                "checkbox": true
+                            },
+                            {
+                                "caption": "micromamba",
+                                "command": "liu_conda_set_backend",
+                                "args": {
+                                    "backend": "micromamba"
+                                },
+                                "checkbox": true
+                            }
+                        ]
+                    },
+                    {
+                        "caption": "Refresh Env",
+                        "command": "liu_conda_refresh_env"
+                    },
+                    {
+                        "caption": "Environments",
+                        "children": [
+                            {
+                                "caption": "No environments found",
+                                "command": "liu_conda_refresh_env",
+                                "enabled": false
+                            }
+                        ]
+                    },
+                    {
+                        "caption": "Run",
+                        "command": "liu_conda_run"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Go to Definition",
+                        "command": "liu_conda_goto_definition"
+                    },
+                    {
+                        "caption": "Show Documentation",
+                        "command": "liu_conda_show_documentation"
+                    },
+                    {
+                        "caption": "Hover Documentation",
+                        "command": "liu_conda_toggle_hover_documentation",
+                        "checkbox": true
+                    },
+                    {
+                        "caption": "Type Diagnostics",
+                        "command": "liu_conda_type_diagnostics"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Jedi Off",
+                        "command": "liu_conda_jedi_status"
+                    },
+                    {
+                        "caption": "Zuban Off",
+                        "command": "liu_conda_zuban_status"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Set Backend Path...",
+                        "command": "liu_conda_set_backend_path"
+                    },
+                    {
+                        "caption": "Global Path Search",
+                        "command": "liu_conda_toggle_global_path_search",
+                        "checkbox": true
+                    }
+                ]
+            }
+        ]
+    }
+]
