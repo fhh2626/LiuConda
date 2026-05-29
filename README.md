@@ -1,6 +1,13 @@
-# LiuConda
+<div align="center">
+  
+# Lightweight IDE Utility for Conda (LiuConda)
+  
+</div>
 
-**Lightweight IDE Utility for Conda**  
+<img width="1709" height="612" alt="UI" src="https://github.com/user-attachments/assets/204a180a-e090-4d8f-989c-5ae266a02964" />
+
+<br><br>
+
 A Sublime Text 4 plugin that connects the editor to `conda` and `micromamba`
 Python environments.
 
