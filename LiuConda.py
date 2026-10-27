@@ -18,6 +18,7 @@ import sublime_plugin
 SETTINGS_FILE = "LiuConda.sublime-settings"
 MAIN_MENU_FILE = os.path.join(os.path.dirname(__file__), "Main.sublime-menu")
 JEDI_WORKER_FILE = os.path.join(os.path.dirname(__file__), "LiuCondaJediWorker.py")
+WINDOWS_LAUNCHER_FILE = os.path.join(os.path.dirname(__file__), "LiuCondaWindowsLauncher.py")
 BACKENDS = ("conda", "micromamba")
 LOGGER = logging.getLogger(__name__)
 _signature_requests = {}
@@ -662,6 +663,15 @@ def _environment_command(command, env=None):
     backend = _backend()
     executable = _backend_executable(backend)
     env_path = _env_path(env_id)
+    if os.name == "nt" and backend == "micromamba":
+        if not env_path:
+            raise FileNotFoundError("LiuConda: refresh environments to resolve the selected environment path.")
+        python = os.path.join(env_path, "python.exe")
+        if not os.path.isfile(python):
+            raise FileNotFoundError("LiuConda: the selected environment has no python.exe: {}".format(env_path))
+        # micromamba run constructs CMD scripts and corrupts non-ASCII arguments.
+        # The launcher activates through PowerShell, then starts native argv/stdio.
+        return [python, "-I", "-u", WINDOWS_LAUNCHER_FILE, executable, env_path, "--", command]
     if env_path:
         return [executable, "run", "-p", env_path, command]
     return [executable, "run", "-n", env_id, command]
@@ -688,7 +698,10 @@ def _run_process(cmd, input_text=None, timeout=30):
     try:
         output, _ = process.communicate(input_data, timeout=timeout)
     except subprocess.TimeoutExpired as error:
-        _kill_process(process)
+        if os.name == "nt":
+            _kill_process_tree(process)
+        else:
+            _kill_process(process)
         try:
             output, _ = process.communicate(timeout=1)
         except Exception:
@@ -1091,6 +1104,8 @@ class _JediWorker:
             stderr=subprocess.PIPE,
             startupinfo=_startupinfo(),
             text=True,
+            encoding="utf-8",
+            errors="replace",
         )
         _register_process_job(self.process)
         self.reader = threading.Thread(target=self._read_stdout, daemon=True)
